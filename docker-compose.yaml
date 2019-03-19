@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  snoopy:
+    image: golang:latest
+    container_name: snoopy
+    entrypoint: /app/bin/entrypoint.sh
+    privileged: yes
+    volumes:
+      - "./:/app"
