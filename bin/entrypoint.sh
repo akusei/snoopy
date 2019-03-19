@@ -6,7 +6,6 @@ set -o pipefail
 
 shopt -s globstar
 
-
 build()
 {
     local version=$(cat /app/version.txt)
@@ -65,9 +64,11 @@ decrypt_dir()
 
 decrypt()
 {
-    local password=""
-    read -p "Enter Password: " -s password
-    echo
+    local password="${SNOOPY_PASSWORD:-}"
+    if [[ -z ${password} ]]; then
+        read -p "Enter Password: " -s password
+        echo
+    fi
 
     decrypt_dir "${password}" "/app/protected/resources" "/app/resources"
     decrypt_dir "${password}" "/app/protected/exploit" "/app/src/exploit"
@@ -100,17 +101,19 @@ encrypt_dir()
 
 encrypt()
 {
-    local password="a"
+    local password="${SNOOPY_PASSWORD:-}"
     local confirm="b"
 
-    read -p "Enter Password: " -s password
-    echo
-    read -p "Confirm Password: " -s confirm
-    if [[ ${password} != ${confirm} ]]; then
-        echo "passwords do not match"
-        exit 1
+    if [[ -z ${password} ]]; then
+        read -p "Enter Password: " -s password
+        echo
+        read -p "Confirm Password: " -s confirm
+        if [[ ${password} != ${confirm} ]]; then
+            echo "passwords do not match"
+            exit 1
+        fi
+        echo
     fi
-    echo
 
     encrypt_dir "${password}" "/app/resources" "/app/protected/resources"
     encrypt_dir "${password}" "/app/src/exploit" "/app/protected/exploit"

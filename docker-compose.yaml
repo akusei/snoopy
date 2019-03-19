@@ -6,5 +6,7 @@ services:
     container_name: snoopy
     entrypoint: /app/bin/entrypoint.sh
     privileged: yes
+    environment:
+      SNOOPY_PASSWORD: ${SNOOPY_PASSWORD}
     volumes:
       - "./:/app"
