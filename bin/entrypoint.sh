@@ -6,6 +6,7 @@ set -o pipefail
 
 shopt -s globstar
 
+
 build()
 {
     local version=$(cat /app/version.txt)
@@ -78,14 +79,18 @@ encrypt_dir()
 {
     declare password=$1 srcDir=$2 destDir=$3
 
-    rm -rf "${destDir}/*"
+    for dir in ${srcDir}/**/*; do
+        local newDir=$(echo "${dir}" | sed -e "s#^${srcDir}/#${destDir}/#")
+        if [[ -d ${dir} ]]; then
+            mkdir -p "${newDir}"
+        fi
+    done
 
     for file in ${srcDir}/**/*; do
         local newFile=$(echo "${file}" | sed -e "s#^${srcDir}/#${destDir}/#")
         local displayName=$(echo "${file}" | sed -e "s#^${srcDir}/##")
 
         if [[ -d ${file} ]]; then
-            mkdir -p "${newFile}"
             continue
         fi
 
@@ -114,6 +119,8 @@ encrypt()
         fi
         echo
     fi
+
+    rm -rf /app/protected/*
 
     encrypt_dir "${password}" "/app/resources" "/app/protected/resources"
     encrypt_dir "${password}" "/app/src/exploit" "/app/protected/exploit"
