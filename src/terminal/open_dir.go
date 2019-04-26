@@ -45,17 +45,17 @@ func init() {
 	remoteShell.AddCommand(openDirCmd)
 }
 
-func openEnable(sh *shell.Shell, args []string) error {
+func openEnable(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("this will let you browse all files in a interwebz browser")
 	return nil
 }
 
-func openDisable(sh *shell.Shell, args []string) error {
+func openDisable(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("no soup for you!")
 	return nil
 }
 
-func openStatus(sh *shell.Shell, args []string) error {
+func openStatus(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("ummm... I don't know what the status is")
 	return nil
 }

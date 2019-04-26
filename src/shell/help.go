@@ -22,7 +22,7 @@ var mixedUpMotherGoose = []string{
 	"It's a bug and it'll get fixed",
 }
 
-func showHelp(sh *Shell, args []string) error {
+func showHelp(sh *Shell, cmd *Command, args []string) error {
 	fmt.Println("Available Commands:")
 
 	for _, cmd := range sh.commands {

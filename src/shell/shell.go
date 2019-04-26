@@ -97,7 +97,7 @@ func (s *Shell) AddCommand(cmd *Command) {
 	}
 
 	cmd.Command.RunE = func(c *cobra.Command, args []string) error {
-		return cmd.Run(s, args)
+		return cmd.Run(s, cmd, args)
 	}
 }
 

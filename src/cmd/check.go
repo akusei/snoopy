@@ -42,8 +42,15 @@ func check(cmd *cobra.Command, args []string) error {
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
 
-	if proxy != nil {
-		socksUrl, _ := url.Parse(fmt.Sprintf("socks5://%s:%d", *proxy, *proxyPort))
+	proxy, _ := cmd.PersistentFlags().GetString("proxy")
+	proxyPort, _ := cmd.PersistentFlags().GetUint16("proxy-port")
+
+	if proxy != "" {
+		urlString := fmt.Sprintf("socks5://%s", proxy)
+		if proxyPort > 0 {
+			urlString = fmt.Sprintf("%s:%d", urlString, proxyPort)
+		}
+		socksUrl, _ := url.Parse(urlString)
 		transport.Proxy = http.ProxyURL(socksUrl)
 	}
 

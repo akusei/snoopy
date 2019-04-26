@@ -12,6 +12,11 @@ var remoteShell, _ = shell.New(
 	shell.WithDir("/var/www/cgi-bin"),
 )
 
-func Run(target string) error {
+var targetPort uint16
+var targetSchema string
+
+func Run(schema string, target string, port uint16) error {
+	targetSchema = schema
+	targetPort = port
 	return remoteShell.Run(target)
 }

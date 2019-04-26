@@ -19,7 +19,7 @@ func init() {
 	remoteShell.AddCommand(usersCmd)
 }
 
-func users(sh *shell.Shell, args []string) error {
+func users(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("listing all users on this system... root, just root")
 	return nil
 }

@@ -6,7 +6,7 @@ var exitCmd = &Command{
 	Command: &cobra.Command{
 		Use: "exit",
 	},
-	Run: func(sh *Shell, args []string) error {
+	Run: func(sh *Shell, cmd *Command, args []string) error {
 		sh.TriggerExit()
 		return nil
 	},

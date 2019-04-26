@@ -19,7 +19,7 @@ func init() {
 	remoteShell.AddCommand(bypassCmd)
 }
 
-func authBypass(sh *shell.Shell, args []string) error {
+func authBypass(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("Super cool authentication bypass url goes here!")
 	return nil
 }

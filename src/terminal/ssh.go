@@ -20,7 +20,7 @@ func init() {
 	remoteShell.AddCommand(sshCmd)
 }
 
-func ssh(sh *shell.Shell, args []string) error {
+func ssh(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("ssh is enabled?")
 	return nil
 }

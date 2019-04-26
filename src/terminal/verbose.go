@@ -19,7 +19,7 @@ func init() {
 	remoteShell.AddCommand(verboseCmd)
 }
 
-func verbose(sh *shell.Shell, args []string) error {
+func verbose(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("I might remove this")
 	return nil
 }

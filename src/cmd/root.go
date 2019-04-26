@@ -15,12 +15,9 @@ var rootCmd = &cobra.Command{
 	SilenceErrors: true,
 }
 
-var proxy *string
-var proxyPort *int16
-
 func init() {
-	proxy = rootCmd.PersistentFlags().StringP("proxy", "x", "", "Proxy to use for connections")
-	proxyPort = rootCmd.PersistentFlags().Int16P("proxy-port", "p", 0, "Proxy port")
+	rootCmd.PersistentFlags().StringP("proxy", "x", "", "Proxy to use for connections")
+	rootCmd.PersistentFlags().Uint16P("proxy-port", "p", 0, "Proxy port")
 }
 
 func addExample(cmd *cobra.Command, example string) {

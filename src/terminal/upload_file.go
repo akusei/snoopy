@@ -20,7 +20,7 @@ func init() {
 	remoteShell.AddCommand(uploadCmd)
 }
 
-func upload(sh *shell.Shell, args []string) error {
+func upload(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("uploading all the datas")
 	return nil
 }

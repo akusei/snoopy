@@ -19,7 +19,7 @@ func init() {
 	remoteShell.AddCommand(debugCmd)
 }
 
-func toggleDebug(sh *shell.Shell, args []string) error {
+func toggleDebug(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("might remove this command?")
 	return nil
 }

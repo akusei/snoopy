@@ -10,7 +10,7 @@ type Command struct {
 func (cm *Command) AddCommand(shell *Shell, cmd ...*Command) {
 	for _, command := range cmd {
 		command.Command.RunE = func(c *cobra.Command, args []string) error {
-			return command.Run(shell, args)
+			return command.Run(shell, command, args)
 		}
 
 		cm.Command.AddCommand(command.Command)

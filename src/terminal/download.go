@@ -20,7 +20,7 @@ func init() {
 	remoteShell.AddCommand(downloadCmd)
 }
 
-func download(sh *shell.Shell, args []string) error {
+func download(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("look at you, sneakin' a file, how cute")
 	return nil
 }

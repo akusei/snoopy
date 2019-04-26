@@ -20,7 +20,7 @@ func init() {
 	remoteShell.AddCommand(versionCmd)
 }
 
-func version(sh *shell.Shell, args []string) error {
+func version(sh *shell.Shell, cmd *shell.Command, args []string) error {
 	fmt.Println("FROM VERSION CMD")
 	return nil
 }
